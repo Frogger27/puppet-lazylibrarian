@@ -18,7 +18,7 @@ class lazylibrarian( $source = 'true' ) {
     group { "lazylibrarian":
         allowdupe => false,
         ensure => present,
-        gid => 604,
+        gid => 605,
         name => 'lazylibrarian',
         before => User["lazylibrarian"]
     }
