@@ -10,11 +10,11 @@ class lazylibrarian::config {
         recurse => 'true'
     }
 
-    #file { "/usr/local/lazylibrarian-data/config.ini":
-    #    content => template('lazylibrarian/config.ini.erb'),
-    #    owner => 'lazylibrarian',
-    #    group => 'lazylibrarian',
-    #    mode => '0644',
-    #    require => File['/usr/local/lazylibrarian-data']
-    #}
+    file { "/usr/local/lazylibrarian-data/config.ini":
+        content => template('lazylibrarian/config.ini.erb'),
+        owner => 'lazylibrarian',
+        group => 'lazylibrarian',
+        mode => '0644',
+        require => File['/usr/local/lazylibrarian-data']
+    }
 }
