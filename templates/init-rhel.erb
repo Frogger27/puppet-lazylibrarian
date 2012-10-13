@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# lazylibrarian			Startup script for lazylibrarian
+#
+# chkconfig: - 16 84
+# description: lazylibrarian is an automatic ebook downloader for SABnzbd
+# processname: lazylibrarian
+#
+### BEGIN INIT INFO
+# Provides: lazylibrarian
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: start and stop lazylibrarian
+# Description: lazylibrarian is an automatic ebook downloader for SABnzbd
+### END INIT INFO
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Defaults
+PATH=/usr/bin:/usr/local/bin:/usr/local/sbin:/sbin:/bin:/usr/sbin
+PYTHON_LOCATION="/usr/local/bin/python2.7"
+
+# Daemon info
+DAEMON_USER="lazylibrarian"
+DAEMON_LOCATION="/usr/local/lazylibrarian/LazyLibrarian.py"
+DAEMON_ARGS="--datadir /usr/local/lazylibrarian-data --daemon"
+DAEMON_URL="http://<%= ipaddress %>/lazylibrarian"
+RETVAL=0
+
+start() {
+	echo -n $"Starting lazylibrarian: "
+	daemon --user=$DAEMON_USER $PYTHON_LOCATION $DAEMON_LOCATION $DAEMON_ARGS &
+    RETVAL=$?
+    return $RETVAL
+}
+
+stop() {
+	echo -n $"Stopping lazylibrarian: "
+	PID=`ps -ef | grep LazyLibrarian.py | grep -v runuser | grep -v grep | grep -v bash | awk '{print $2}'`
+	echo $PID
+	kill -15 $PID
+	RETVAL=$?
+	return $RETVAL
+}
+
+case "$1" in
+   start)
+        start
+        RETVAL=$?
+        ;;
+   stop)
+        stop
+        RETVAL=$?
+        ;;
+   restart)
+        stop
+        start
+        RETVAL=$?
+        ;;
+   force-reload)
+        stop
+        start
+        RETVAL=$?
+        ;;
+   *)
+   echo "Usage:$0{start|stop|restart|force-reload}"
+   RETVAL=1
+esac
+exit $RETVAL
