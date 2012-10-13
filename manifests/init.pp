@@ -8,9 +8,9 @@ class lazylibrarian( $source = 'true' ) {
     user { 'lazylibrarian':
         allowdupe => false,
         ensure => 'present',
-        uid => '604',
+        uid => '606',
         shell => '/bin/bash',
-        gid => '604',
+        gid => '606',
         home => '/home/lazylibrarian',
         password => '*',
     }
