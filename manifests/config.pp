@@ -6,14 +6,14 @@ class lazylibrarian::config {
     file { "/usr/local/lazylibrarian-data":
         ensure => directory,
         owner => 'lazylibrarian',
-        group => 'lazylibrarian',
+        group => 'automators',
         recurse => 'true'
     }
 
     file { "/usr/local/lazylibrarian-data/config.ini":
         content => template('lazylibrarian/config.ini.erb'),
         owner => 'lazylibrarian',
-        group => 'lazylibrarian',
+        group => 'automators',
         mode => '0644',
         require => File['/usr/local/lazylibrarian-data']
     }

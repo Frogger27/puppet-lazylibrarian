@@ -1,4 +1,4 @@
-class lazylibrarian( $source = 'true' ) {
+class lazylibrarian {
     
     $url = "https://github.com/itsmegb/LazyLibrarian.git"
     $lazylibrarian_port = extlookup("lazylibrarian_port")
@@ -10,24 +10,17 @@ class lazylibrarian( $source = 'true' ) {
         ensure => 'present',
         uid => '606',
         shell => '/bin/bash',
-        gid => '606',
+        gid => '700',
         home => '/home/lazylibrarian',
         password => '*',
-    }
-    
-    group { "lazylibrarian":
-        allowdupe => false,
-        ensure => present,
-        gid => 606,
-        name => 'lazylibrarian',
-        before => User["lazylibrarian"]
     }
 
     file { '/home/lazylibrarian':
         ensure => directory,
         owner => 'lazylibrarian',
-        group => 'lazylibrarian',
+        group => 'automators',
         mode => '0644',
+        recurse => 'true'
     }
     
     exec { 'download-lazylibrarian':
@@ -39,8 +32,9 @@ class lazylibrarian( $source = 'true' ) {
     file { "/usr/local/lazylibrarian":
         ensure => directory,
         owner => 'lazylibrarian',
-        group => 'lazylibrarian',
+        group => 'automators',
         mode => '0644',
+        recurse => 'true'
     }
 
     file { "/etc/init.d/lazylibrarian":

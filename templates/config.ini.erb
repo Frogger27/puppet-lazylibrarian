@@ -16,16 +16,16 @@ blackhole = 0
 blackholedir = ""
 usenet_retention = ""
 [SABnzbd]
-sab_host = ""
+sab_host = <%= sabnzbd_host %>/<%= sabnzbd_root %>
 sab_port = ""
 sab_user = ""
 sab_pass = ""
-sab_api = ""
-sab_cat = ""
+sab_api = <%= sabnzbd_apikey %>
+sab_cat = "eBooks"
 [NZBMatrix]
-nzbmatrix = 0
-nzbmatrix_user = ""
-nzbmatrix_api = ""
+nzbmatrix = 1
+nzbmatrix_user = <%= nzbmatrix_username %>
+nzbmatrix_api = <%= nzbmatrix_apikey %>
 [Newznab]
 newznab = 0
 newznab_host = ""
