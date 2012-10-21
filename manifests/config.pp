@@ -8,7 +8,7 @@ class lazylibrarian::config {
     $sabnzbd_root = extlookup("sabnzbd_root")
     $sabnzbd_apikey = extlookup("sabnzbd_apikey")
 
-    file { "/usr/local/lazylibrarian/data/config.ini":
+    file { "/usr/local/lazylibrarian/config.ini":
         content => template('lazylibrarian/config.ini.erb'),
         owner => 'lazylibrarian',
         group => 'automators',
